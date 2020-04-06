@@ -14,3 +14,6 @@ transform(self, x)
 
 fit_transform(self, x, y, alpha = 0.05, start_bins = 200, disp = True)
 
+# Attributes
+
+binning_rules
