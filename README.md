@@ -1,14 +1,25 @@
 # Supervised Binning
 A Python class for binning continuous variables in a way that the bins significantly predict a binary target variable
 
+
+
+# Author
+1. Andrew Francis
+
+
+
 # Overview
 Intial characteristic analysis is a binning method that bins continuous predictor variables into disctrete categroical bins. This is useful when implementing a logistic regression model, but have variables that are not linearly associated with the logit. The hope is that the tool will prove useful for individuals practicing financial analytics in Python. 
 
-Initial characteristic analysis starts by breaking the continuos variable into a pre-specifed number of bins with equal sample sizes across bins. Fishers exact test is used to determine if a significant difference bewtween adjacent bins exists. If no significant exists then the bin contents are merged and the algorithm starts from the beginning. This process is repeated until all bins are significantly different. 
+Initial characteristic analysis starts by breaking the continuos variable into a pre-specifed number of bins with equal sample sizes across bins. Fishers exact test is used to determine if a significant difference bewtween adjacent bins exists. If no significant exists then the bin contents are merged and the algorithm starts from the beginning. This process is repeated until all bins are significantly different.
+
+
 
 # Parameters
 
 None
+
+
 
 # Methods
 
@@ -51,6 +62,8 @@ None
     variable_labels: array of shape (n_samples, n_features)
       Contains the binned continuous variable
 
+
+
 **fit_transform**(self, x, y, alpha, start_bins, disp)
 
     Finds significant splits between bins, merges bins adjacent bins that don't have significantly different target 
@@ -80,12 +93,15 @@ None
     variable_labels: array of shape (n_samples, n_features)
       Contains the binned continuous variable
 
+
+
 # Attributes
 
 **binning_rules**: list of length n_features
     
     Contains the rules learned on training data to bin the variables. Contains a rule array for each feature in the dataset.
     The rule arrays are given as [bin_label, lower_bound, upper_bound]
+    
     
     
 # Use Case Example
@@ -140,3 +156,8 @@ Find the bin labels on the test dataset:
            [5., 2., 2.],
            [5., 2., 0.],
            [5., 2., 2.]])
+           
+# Dependencies
+1. numpy
+2. pandas
+3. scipy
