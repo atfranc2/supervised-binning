@@ -74,6 +74,61 @@ None
 
 # Attributes
 
-**binning_rules**: array of shape (3, n_rules)
+**binning_rules**: list of length n_features
     
-    Contains the rules learned on training data to bin the variables
+    Contains the rules learned on training data to bin the variables. Contains a rule array for each feature in the dataset.
+    The rule arrays are given as [bin_label, lower_bound, upper_bound]
+    
+    
+# Use Case Example
+
+Define some data: 
+
+    x_train: Data used to find binning rules
+    y_train: Target variable values used to train the splits
+    x_test: Data used to evalute the model
+    y_test: Data used to evaluate the model 
+
+
+
+Initialize the SupervisedBinning object class:
+
+    sbinning = SupervisedBinning()
+
+
+
+Find split rules:
+
+    sbinning.fit(x_train, y_train, alpha = 0.05, start_bins = 200, disp = True)
+
+            This will display information about the status of the binning procedure: 
+                Significant splits detected on variable 1
+                Significant splits detected on variable 2
+                Significant splits detected on variable 3
+
+
+
+Show on of the split rule arrays:
+
+    sbinning.binning_rules[1]
+    
+    Output: 
+    array([[ 0.0000000e+00, -8.2286610e+01, -6.3280290e+01],
+           [ 1.0000000e+00, -6.3235650e+01, -6.1001400e+01],
+           [ 2.0000000e+00, -6.0957786e+01,  2.4889000e+04],
+           [ 3.0000000e+00,  2.4891000e+04,  2.6989000e+04],
+           [ 4.0000000e+00,  2.6994000e+04,  1.7974390e+06]])
+           
+    
+Find the bin labels on the test dataset: 
+
+    sbinning.transform(x_test)
+    
+    Output: 
+    array([[5., 2., 2.],
+           [5., 4., 4.],
+           [5., 4., 4.],
+           ...,
+           [5., 2., 2.],
+           [5., 2., 0.],
+           [5., 2., 2.]])
